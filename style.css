@@ -1,0 +1,82 @@
+/* style.css */
+
+/* Para sa .item-details - ito ay OK para sa loob ng bawat item */
+.item-details {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Puwang sa pagitan ng picture at text */
+    margin-bottom: 10px; /* Dagdag space sa baba ng details */
+}
+
+/* Para hindi maging higante ang pictures sa loob ng item */
+.item img {
+    width: 60px; /* Maaari mong adjust ito */
+    height: 60px; /* Maaari mong adjust ito */
+    object-fit: cover; /* Para hindi bansot o payat ang image */
+    border-radius: 8px; /* Palibog ang kanto */
+    border: 1px solid rgb(224, 46%, 9%); /* Kulay ng border */
+}
+
+/* Ito ang bagong styling para sa iyong .menu container */
+.menu {
+    display: flex; /* Gawing flex container ang .menu */
+    flex-wrap: wrap; /* Papayagan ang items na mag-wrap sa susunod na linya */
+    justify-content: center; /* I-center ang items horizontally */
+    gap: 20px; /* Space sa pagitan ng bawat produkto (item) */
+    padding: 20px; /* Padding sa paligid ng menu section */
+}
+
+/* Ito ang styling para sa bawat indibidwal na produkto (.item) */
+.item {
+    /* Ang .item na ngayon ay isang flex item sa loob ng .menu */
+    /* Hindi na ito mismo ang flex container */
+    width: 250px; /* Set ang lapad ng bawat item. Adjust as needed. */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(87, 15, 221, 0.1);
+    /* Tanggalin ang margin-bottom, border-bottom, padding-bottom dito, ilipat sa loob ng item-details kung kailangan */
+    margin-bottom: 10px; /* Para may space sa pagitan ng rows ng items */
+}
+
+/* Styling para sa button, OK na ito */
+.order-btn {
+    background-color: #4CAF50; /* Green color */
+    color: #e4be14;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    display: inline-block; /* Para gumana ang padding at width */
+    margin-top: 10px; /* Space sa taas ng button */
+}
+
+.order-btn:hover {
+    background-color: #2e11d1; /* Darker green kapag tinapatan ng mouse */
+}
+
+/* Ang mga sumusunod ay mukhang tama na at hindi direktang nakakaapekto sa alignment ng items */
+.map-container {
+    margin-top: 80px;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 80px;
+}
+
+.bakery-logo { /* ito yung image mismo ng logo */
+    width: 500px;
+    height: 300px;
+    border-radius: 10%; /* Gawin itong pabilog */
+    border: 3px dotted #2b5b42; /* Kulay green na border gaya ng tema mo */
+    object-fit: cover;
+}
