@@ -42,12 +42,13 @@
 
 /* Styling para sa button, OK na ito */
 .order-btn {
-    background-color: #4CAF50; /* Green color */
-    color: #e4be14;
+    background-color: #e9e767; /* Green color */
+    color: #22211fde;
     padding: 8px 12px;
     text-decoration: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 5%;
+    color:#dad07a
+    font-size: 28px;
     font-weight: bold;
     transition: 0.3s;
     display: inline-block; /* Para gumana ang padding at width */
@@ -67,10 +68,10 @@
 }
 
 .logo-container {
-    display: flex;
-    align-items: center;
+    display: flex; /* I-align ang logo sa kanan */
     justify-content: flex-end;
-    gap: 80px;
+    width: 100%;
+    margin-top: 20px; /* I-align ang logo sa kanan */
 }
 
 .bakery-logo { /* ito yung image mismo ng logo */
