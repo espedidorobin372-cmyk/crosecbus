@@ -81,3 +81,24 @@
     border: 3px dotted #2b5b42; /* Kulay green na border gaya ng tema mo */
     object-fit: cover;
 }
+/* Ang bahagi ng presyo sa loob ng bawat aytem */
+.item b {
+    color: #ff0000;      /* Gagawing pula ang kulay */
+    font-size: 18px;      /* Papalakihin ang titik */
+    font-weight: bold;    /* Gagawing mas makapal */
+}
+/* Ang larawan sa loob ng bawat aytem */
+.item-details img {
+    border: 3px solid #2b5b42;   /* Lalagyan ng hangganan na kulay berde */
+    border-radius: 15px;         /* Gagawing medyo bilog ang mga gilid */
+    width: 150px;                /* Iisahing laki para sa lahat */
+    height: auto;                /* Panatilihin ang tamang sukat */
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.2); /* Lalagyan ng anino para lumutang */
+}
+/* Ang pangalan ng tinapay sa loob ng bawat aytem */
+.item-details span {
+    color: #1a237e;         /* Kulay asul na madilim */
+    font-size: 17px;        /* Laki ng titik */
+    font-family: Arial, sans-serif; /* Uri ng sulat */
+    font-weight: 600;       /* Kapal ng sulat */
+}
