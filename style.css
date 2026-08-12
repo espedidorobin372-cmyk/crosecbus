@@ -1,6 +1,6 @@
 /* style.css */
 
-/* Para sa .item-details - ito ay OK para sa loob ng bawat item */
+/* Para sa .item-details */
 .item-details {
     display: flex;
     align-items: center;
@@ -10,14 +10,14 @@
 
 /* Para hindi maging higante ang pictures sa loob ng item */
 .item img {
-    width: 60px; /* Maaari mong adjust ito */
-    height: 60px; /* Maaari mong adjust ito */
+    width: 60px; /* Pweding adjasan pa */
+    height: 60px; /* Pweding adjusan pa */
     object-fit: cover; /* Para hindi bansot o payat ang image */
-    border-radius: 8px; /* Palibog ang kanto */
+    border-radius: 8px; /* Pabilog ang kanto */
     border: 1px solid rgb(224, 46%, 9%); /* Kulay ng border */
 }
 
-/* Ito ang bagong styling para sa iyong .menu container */
+/* Styling para sa.menu container */
 .menu {
     display: flex; /* Gawing flex container ang .menu */
     flex-wrap: wrap; /* Papayagan ang items na mag-wrap sa susunod na linya */
@@ -40,7 +40,7 @@
     margin-bottom: 10px; /* Para may space sa pagitan ng rows ng items */
 }
 
-/* Styling para sa button, OK na ito */
+/* Styling para sa button */
 .order-btn {
     background-color: #e9e767; /* Green color */
     color: #22211fde;
@@ -59,7 +59,6 @@
     background-color: #2e11d1; /* Darker green kapag tinapatan ng mouse */
 }
 
-/* Ang mga sumusunod ay mukhang tama na at hindi direktang nakakaapekto sa alignment ng items */
 .map-container {
     margin-top: 80px;
     border-radius: 40px;
@@ -74,11 +73,11 @@
     margin-top: 20px; /* I-align ang logo sa kanan */
 }
 
-.bakery-logo { /* ito yung image mismo ng logo */
+.bakery-logo { /* ang image ng logo */
     width: 500px;
     height: 300px;
-    border-radius: 10%; /* Gawin itong pabilog */
-    border: 3px dotted #2b5b42; /* Kulay green na border gaya ng tema mo */
+    border-radius: 10%; /* Gawing pabilog */
+    border: 3px dotted #2b5b42; /* Kulay green na border gaya ng tema */
     object-fit: cover;
 }
 /* Ang bahagi ng presyo sa loob ng bawat aytem */
