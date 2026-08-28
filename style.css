@@ -102,6 +102,10 @@
     font-weight: 600;       /* Kapal ng sulat */
 }
 
-.img:hover {
+img:hover {
 transform: scale(2.9) translate(-5px);
+}
+
+.item:hover {
+    background-color: #a7d111;
 }
