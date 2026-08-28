@@ -101,3 +101,7 @@
     font-family: Arial, sans-serif; /* Uri ng sulat */
     font-weight: 600;       /* Kapal ng sulat */
 }
+
+img:hover {
+transform: scale(2.9) translate(-5px);
+}
