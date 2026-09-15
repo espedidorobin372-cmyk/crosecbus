@@ -1,750 +1,517 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fil">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROBIN & JANE BAKERY</title>
-    <link rel="icon" href="bakery_icons.ico" type="image/x-icon">
-    <style>
-.item-details {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 10px;
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROBIN &amp; JANE BAKERY</title>
+  <link rel="icon" href="bakery_icons.ico" type="image/x-icon">
+  <style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+html,body{min-height:100%}
+body{margin:0;background:transparent!important;position:relative}
+
+/* ===== FIXED LIVING NATURE BACKGROUND ===== */
+#nature-background{
+ position:fixed;inset:0;width:100vw;height:100vh;z-index:0;overflow:hidden;
+ pointer-events:none;
+ background:linear-gradient(to bottom,#73c9ff 0%,#c9f1ff 58%,#bfe8a1 100%);
+ transition:background 2s ease;
 }
-.item img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 1px solid rgb(224, 46%, 9%);
+.nature-sky{position:absolute;inset:0;overflow:hidden}
+.nature-sun{
+ position:absolute;width:110px;height:110px;border-radius:50%;right:10%;top:10%;
+ background:radial-gradient(circle,#fffbd0 0%,#ffe27a 48%,rgba(255,210,70,.15) 70%,transparent 72%);
+ opacity:.95;transition:opacity 2s
 }
-.menu {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
+.nature-moon{
+ position:absolute;width:82px;height:82px;border-radius:50%;right:12%;top:12%;opacity:0;
+ background:radial-gradient(circle at 35% 30%,#fff 0%,#e9eef5 55%,#bfc7d1 100%);
+ box-shadow:0 0 30px rgba(255,255,255,.55);transition:opacity 2s
 }
-.item {
-    width: 250px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 2px 2px 5px rgba(87, 15, 221, 0.1);
-    margin-bottom: 10px;
+.nature-cloud{
+ position:absolute;width:190px;height:52px;border-radius:60px;background:rgba(255,255,255,.78);
+ filter:blur(.8px);box-shadow:0 8px 25px rgba(255,255,255,.22);
+ animation:natureCloud 55s linear infinite
 }
-.order-btn {
-    background-color: #e9e767;
-    color: #dad07a;
-    padding: 8px 12px;
-    text-decoration: none;
-    border-radius: 5%;
-    font-size: 28px;
-    font-weight: bold;
-    transition: 0.3s;
-    display: inline-block;
-    margin-top: 10px;
+.nature-cloud:before,.nature-cloud:after{content:"";position:absolute;border-radius:50%;background:inherit}
+.nature-cloud:before{width:82px;height:82px;left:30px;bottom:10px}
+.nature-cloud:after{width:70px;height:70px;right:28px;bottom:5px}
+.nature-cloud.c1{top:14%;left:-220px}
+.nature-cloud.c2{top:29%;left:-300px;transform:scale(.72);animation-duration:72s;animation-delay:-28s}
+.nature-cloud.c3{top:9%;left:-400px;transform:scale(.55);animation-duration:88s;animation-delay:-50s;opacity:.55}
+@keyframes natureCloud{from{margin-left:0}to{margin-left:calc(100vw + 700px)}}
+
+.nature-hill{position:absolute;left:-10%;width:120%;border-radius:50% 50% 0 0}
+.nature-hill.back{bottom:25%;height:28%;background:linear-gradient(#76b889,#4d9164);opacity:.72}
+.nature-hill.mid{bottom:12%;height:28%;background:linear-gradient(#4f9a60,#2f7548)}
+.nature-ground{position:absolute;left:0;right:0;bottom:0;height:25%;background:linear-gradient(#4d984b,#31713b 55%,#1f542f)}
+.nature-river{
+ position:absolute;left:44%;bottom:0;width:28%;height:39%;
+ background:linear-gradient(120deg,#74d5e8,#3b9fd0 48%,#69c8e3);
+ clip-path:polygon(38% 0,62% 0,92% 100%,8% 100%);opacity:.9
 }
-.order-btn:hover {
-    background-color: #2e11d1;
+.nature-river:after{
+ content:"";position:absolute;inset:0;
+ background:repeating-linear-gradient(170deg,transparent 0 24px,rgba(255,255,255,.28) 25px 27px,transparent 28px 45px);
+ animation:riverFlow 2.5s linear infinite
 }
-.map-container {
-    margin-top: 80px;
-    border-radius: 40px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+@keyframes riverFlow{to{transform:translateY(45px)}}
+
+.nature-tree{
+ position:absolute;bottom:18%;width:22px;height:125px;background:#4b2d1c;border-radius:10px;
+ transform-origin:bottom center;animation:treeWind 2.8s ease-in-out infinite alternate
+}
+.nature-tree:before,.nature-tree:after{content:"";position:absolute;border-radius:50%;background:#2d7d45}
+.nature-tree:before{width:95px;height:95px;left:-38px;top:-55px;box-shadow:35px 20px 0 #3c914d,-20px 24px 0 #347e43}
+.nature-tree:after{width:70px;height:70px;left:-20px;top:-88px;background:#4aa35a}
+.nature-tree.t1{left:8%}.nature-tree.t2{left:80%;transform:scale(.8)}.nature-tree.t3{left:24%;bottom:21%;transform:scale(.62)}
+@keyframes treeWind{to{transform:rotate(2deg) scale(1.02)}}
+
+.nature-grass{
+ position:absolute;bottom:17%;width:3px;height:25px;background:#295f31;transform-origin:bottom;
+ animation:grassWind 1.5s ease-in-out infinite alternate
+}
+@keyframes grassWind{to{transform:rotate(8deg)}}
+
+.nature-butterfly{
+ position:absolute;width:28px;height:22px;animation:butterflyFly 20s ease-in-out infinite;
+ filter:drop-shadow(0 3px 3px rgba(0,0,0,.2))
+}
+.nature-butterfly:before,.nature-butterfly:after{
+ content:"";position:absolute;top:0;width:16px;height:20px;border-radius:80% 20% 80% 20%;
+ background:#f59a2f;animation:wingFlap .32s ease-in-out infinite alternate
+}
+.nature-butterfly:before{left:0;transform-origin:right center}
+.nature-butterfly:after{right:0;transform-origin:left center;transform:scaleX(-1)}
+@keyframes wingFlap{to{transform:scaleY(.35)}}
+@keyframes butterflyFly{
+ 0%{transform:translate(0,0) rotate(4deg)}
+ 25%{transform:translate(20vw,-10vh) rotate(-6deg)}
+ 50%{transform:translate(45vw,3vh) rotate(5deg)}
+ 75%{transform:translate(65vw,-14vh) rotate(-5deg)}
+ 100%{transform:translate(100vw,4vh) rotate(4deg)}
+}
+.nature-butterfly.b1{left:-4%;top:58%}
+.nature-butterfly.b2{left:-8%;top:38%;animation-duration:25s;animation-delay:-8s;transform:scale(.8)}
+.nature-butterfly.b3{left:-10%;top:67%;animation-duration:29s;animation-delay:-17s;transform:scale(.65)}
+
+.nature-bird{position:absolute;width:34px;height:18px;animation:birdFly 20s linear infinite}
+.nature-bird:before,.nature-bird:after{
+ content:"";position:absolute;width:18px;height:7px;border-top:3px solid #29343b;border-radius:50%;
+ animation:birdWing .55s ease-in-out infinite alternate
+}
+.nature-bird:before{left:0;transform-origin:right}.nature-bird:after{right:0;transform-origin:left}
+@keyframes birdWing{to{transform:rotate(20deg) translateY(4px)}}
+@keyframes birdFly{
+ 0%{transform:translate(-10vw,0)}30%{transform:translate(30vw,-7vh)}
+ 60%{transform:translate(60vw,3vh)}100%{transform:translate(115vw,-4vh)}
+}
+.nature-bird.r1{top:22%;left:-5%;animation-duration:25s}
+.nature-bird.r2{top:31%;left:-15%;animation-duration:31s;animation-delay:-10s;transform:scale(.8)}
+.nature-bird.r3{top:16%;left:-20%;animation-duration:38s;animation-delay:-20s;transform:scale(.65)}
+
+.nature-stars{position:absolute;inset:0;opacity:0;transition:opacity 2s}
+.nature-stars i{
+ position:absolute;width:3px;height:3px;border-radius:50%;background:white;
+ box-shadow:0 0 8px white;animation:twinkle 2s ease-in-out infinite alternate
+}
+@keyframes twinkle{to{opacity:.2;transform:scale(.6)}}
+.nature-rain{
+ position:absolute;inset:0;opacity:0;
+ background:repeating-linear-gradient(105deg,transparent 0 15px,rgba(210,240,255,.55) 16px 18px,transparent 19px 34px);
+ animation:rainFall .45s linear infinite;transition:opacity .5s
+}
+@keyframes rainFall{to{background-position:0 45px}}
+.nature-rainbow{
+ position:absolute;width:65vw;height:28vw;left:17%;bottom:13%;border-radius:50%;
+ border:9px solid rgba(255,0,0,.22);border-bottom-color:transparent;opacity:0;filter:blur(2px)
+}
+.nature-rainbow:after{
+ content:"";position:absolute;inset:8px;border-radius:50%;border:8px solid rgba(255,180,0,.20);
+ border-bottom-color:transparent;box-shadow:0 0 0 8px rgba(0,210,100,.16),0 0 0 16px rgba(0,120,255,.15),0 0 0 24px rgba(160,50,255,.13)
 }
 
-.header-top-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-top: 20px;
-    flex-wrap: wrap;
-}
+/* Keep bakery website above nature */
+body>header,body>section{position:relative;z-index:1}
 
-.main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
+/* ===== BAKERY STYLES ===== */
+header{text-align:center;padding:20px 10px}
+.header-top-row{display:flex;justify-content:space-between;align-items:center;width:100%;margin-top:20px;flex-wrap:wrap}
+.main-container{display:flex;flex-direction:column;align-items:center;gap:8px}
+.logo-container{display:flex;align-items:center}
+.bakery-logo{width:350px;height:350px;border-radius:10%;border:3px dotted #2b5b42;object-fit:cover}
+.item-details{display:flex;align-items:center;gap:15px;margin-bottom:10px}
+.item img{width:60px;height:60px;object-fit:cover;border-radius:8px;border:1px solid #e0a909}
+.menu{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;padding:20px}
+.item{
+ width:250px;border:1px solid #ccc;border-radius:8px;padding:15px;text-align:center;
+ box-shadow:2px 2px 5px rgba(87,15,221,.1);margin-bottom:10px;
+ background:rgba(255,255,255,.76);backdrop-filter:blur(4px)
 }
+.item b{color:#ff0000;font-size:18px;font-weight:bold}
+.item-details img{border:3px solid #2b5b42;border-radius:15px;width:150px;height:auto;box-shadow:2px 2px 8px rgba(0,0,0,.2)}
+.item-details span{color:#1a237e;font-size:17px;font-family:Arial,sans-serif;font-weight:600}
+.item:hover{background-color:rgba(167,209,17,.88)}
+.map-container{margin-top:80px;border-radius:40px;overflow:hidden;box-shadow:0 4px 8px rgba(0,0,0,.1)}
+.location{text-align:center;padding:30px 10px}
+.location>p,.location>ul,.location>address{margin:12px auto;max-width:900px}
+.location .item{margin:20px auto}
+.location iframe{display:block}
+.greeting{margin:30px 0 60px}
 
-.logo-container {
-    display: flex;
-    align-items: center;
-}
+.clock-frame{width:320px;height:320px;background:radial-gradient(circle at center,#bfbfbf 0%,#737373 60%,#404040 100%);border:10px solid #555;border-radius:50%;padding:10px;position:relative;display:flex;justify-content:center;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.8),0 0 10px rgba(0,247,255,.3)}
+.glass-overlay{position:absolute;inset:0;border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.02) 50%,rgba(255,255,255,.1));z-index:8;pointer-events:none}
+.clock{width:290px;height:290px;background:url('clock-background.jpeg') center/cover no-repeat;border-radius:50%;position:relative;border:2px solid #00f7ff;box-shadow:inset 0 0 20px rgba(0,0,0,.8);overflow:hidden}
+.center-dot{width:14px;height:14px;background:#ff0055;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:12;box-shadow:0 0 10px #ff0055}
+.hand{position:absolute;bottom:50%;left:50%;transform-origin:bottom center;border-radius:4px;z-index:10}
+.hour{width:8px;height:70px;background:#fff;margin-left:-4px;box-shadow:0 0 10px #fff}
+.minute{width:5px;height:100px;background:#00f7ff;margin-left:-2.5px;box-shadow:0 0 15px #00f7ff}
+.second{width:2px;height:115px;background:#ff0055;margin-left:-1px;box-shadow:0 0 15px #ff0055}
+.number{position:absolute;width:100%;height:100%;text-align:center;font-size:1.5rem;font-weight:bold;color:#00f7ff;text-shadow:0 0 10px #00f7ff,0 0 3px #000;padding:15px;z-index:5}
+.tick{position:absolute;width:100%;height:100%}.tick:before{content:'';position:absolute;top:10px;left:50%;transform:translateX(-50%);width:2px;height:8px;background:rgba(0,247,255,.4)}
+.tick.hour-tick:before{width:4px;height:14px;background:#00f7ff;box-shadow:0 0 10px #00f7ff}
+.digital-container{text-align:center;background:rgba(18,19,36,.8);padding:8px 15px;border-radius:10px;border:1px solid #00f7ff33;box-shadow:0 5px 15px rgba(0,0,0,.5);width:320px;color:#fff}
+.date-text{font-size:.95rem;color:#ff0055;font-weight:600;margin-bottom:5px;text-transform:capitalize}
+.digital-time{font-size:1.8rem;font-weight:bold;letter-spacing:2px;color:#00f7ff;text-shadow:0 0 15px #00f7ff}
+.alarm-container{display:flex;flex-direction:column;align-items:center;gap:8px;background:rgba(18,19,36,.8);padding:10px;border-radius:10px;border:1px solid #00f7ff33;width:320px;color:#fff}
+.alarm-container h3{color:#8892b0;font-size:.85rem;letter-spacing:1px}
+.alarm-inputs{display:flex;gap:8px;width:100%}
+input[type=time],select{background:#080810;border:1px solid #00f7ff;color:#fff;padding:6px;border-radius:5px;outline:none}
+button{background:#00f7ff;color:#080810;border:none;padding:6px 12px;font-weight:bold;border-radius:5px;cursor:pointer}
+button:hover{background:#66faff;box-shadow:0 0 10px #00f7ff}
+.alarm-status{font-size:.85rem;color:#8892b0}.alarm-actions{display:flex;gap:10px;width:100%}
+.snooze-btn{background:#ffaa00;color:#080810;flex:1;padding:8px}.stop-btn{background:#ff0055;color:#fff;flex:1;padding:8px}
 
-.bakery-logo {
-    width: 350px;
-    height: 350px;
-    border-radius: 10%;
-    border: 3px dotted #2b5b42;
-    object-fit: cover;
+@media(max-width:800px){
+ .header-top-row{justify-content:center;gap:25px}
+ .bakery-logo{width:260px;height:260px}
+ .clock-frame{transform:scale(.85);margin:-20px 0}
+ .nature-river{left:38%;width:40%}
 }
-.item b {
-    color: #ff0000;
-    font-size: 18px;
-    font-weight: bold;
-}
-.item-details img {
-    border: 3px solid #2b5b42;
-    border-radius: 15px;
-    width: 150px;
-    height: auto;
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
-}
-.item-details span {
-    color: #1a237e;
-    font-size: 17px;
-    font-family: Arial, sans-serif;
-    font-weight: 600;
-}
-img:hover {
-    transform: scale(1.0) translate(-5px);
-}
-.item:hover {
-    background-color: #a7d111;
-}
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.clock-frame {
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(circle at center, #bfbfbf 0%, #737373 60%, #404040 100%);
-  border: 10px solid #555;
-  border-radius: 50%;
-  padding: 10px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 247, 255, 0.3);
-}
-.glass-overlay {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.1) 100%);
-  z-index: 8;
-  pointer-events: none;
-}
-.clock {
-  width: 290px;
-  height: 290px;
-  background-image: url('clock-background.jpeg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 50%;
-  position: relative;
-  border: 2px solid #00f7ff;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
-  overflow: hidden;
-}
-.center-dot {
-  width: 14px;
-  height: 14px;
-  background-color: #ff0055;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 12;
-  box-shadow: 0 0 10px #ff0055;
-}
-.hand {
-  position: absolute;
-  bottom: 50%;
-  left: 50%;
-  transform-origin: bottom center;
-  border-radius: 4px;
-  z-index: 10;
-}
-.hour {
-  width: 8px;
-  height: 70px;
-  background-color: #ffffff;
-  margin-left: -4px;
-  box-shadow: 0 0 10px #ffffff, 0 0 5px rgba(0, 0, 0, 0.5);
-}
-.minute {
-  width: 5px;
-  height: 100px;
-  background-color: #00f7ff;
-  margin-left: -2.5px;
-  box-shadow: 0 0 15px #00f7ff, 0 0 5px rgba(0, 0, 0, 0.5);
-}
-.second {
-  width: 2px;
-  height: 115px;
-  background-color: #ff0055;
-  margin-left: -1px;
-  box-shadow: 0 0 15px #ff0055, 0 0 5px rgba(0, 0, 0, 0.5);
-}
-.number {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #00f7ff;
-  text-shadow: 0 0 10px #00f7ff, 0 0 3px rgba(0, 0, 0, 0.8);
-  padding: 15px;
-  z-index: 5;
-}
-.tick {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-.tick::before {
-  content: '';
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 8px;
-  background-color: rgba(0, 247, 255, 0.4);
-}
-.tick.hour-tick::before {
-  width: 4px;
-  height: 14px;
-  background-color: #00f7ff;
-  box-shadow: 0 0 10px #00f7ff, 0 0 3px rgba(0, 0, 0, 0.8);
-}
-.digital-container {
-  text-align: center;
-  background-color: rgba(18, 19, 36, 0.8);
-  padding: 8px 15px;
-  border-radius: 10px;
-  border: 1px solid #00f7ff33;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-  width: 320px;
-  color: #fff;
-}
-.date-text {
-  font-size: 0.95rem;
-  color: #ff0055;
-  font-weight: 600;
-  margin-bottom: 5px;
-  text-transform: capitalize;
-  text-shadow: 0 0 8px rgba(255, 0, 85, 0.6);
-}
-.digital-time {
-  font-size: 1.8rem;
-  font-weight: bold;
-  letter-spacing: 2px;
-  color: #00f7ff;
-  text-shadow: 0 0 15px #00f7ff;
-}
-.alarm-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  background-color: rgba(18, 19, 36, 0.8);
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #00f7ff33;
-  width: 320px;
-  color: #fff;
-}
-.alarm-container h3 {
-  color: #8892b0;
-  font-size: 0.85rem;
-  letter-spacing: 1px;
-}
-.alarm-inputs {
-  display: flex;
-  gap: 8px;
-  width: 100%;
-}
-input[type="time"], select {
-  background-color: #080810;
-  border: 1px solid #00f7ff;
-  color: #ffffff;
-  padding: 6px;
-  border-radius: 5px;
-  outline: none;
-}
-button {
-  background-color: #00f7ff;
-  color: #080810;
-  border: none;
-  padding: 6px 12px;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #66faff;
-  box-shadow: 0 0 10px #00f7ff;
-}
-.alarm-status {
-  font-size: 0.85rem;
-  color: #8892b0;
-}
-.alarm-actions {
-  display: flex;
-  gap: 10px;
-  width: 100%;
-}
-.snooze-btn {
-  background-color: #ffaa00;
-  color: #080810;
-  flex: 1;
-  padding: 8px;
-}
-.stop-btn {
-  background-color: #ff0055;
-  color: #ffffff;
-  flex: 1;
-  padding: 8px;
-}
-    </style>
-</head>
-<body>
-<header>
-    <h1 style="color: blue;">ROBIN & JANE BAKERY</h1>
-    <p style="color: rgb(238, 166, 10);">tinapay, mainit pa sa pagmamahal mo, bili na.</p>
-
-    <div class="header-top-row">
-
-        <div class="main-container">
-            <div class="clock-frame">
-              <div class="glass-overlay"></div>
-              <div class="clock">
-                <div class="center-dot"></div>
-                <div class="hand hour" id="hour-hand"></div>
-                <div class="hand minute" id="minute-hand"></div>
-                <div class="hand second" id="second-hand"></div>
-              </div>
-            </div>
-            <div class="digital-container">
-              <div class="date-text" id="date-text">Lunes, Jan 1, 2026</div>
-              <div class="digital-time" id="digital-time">10:10:30 AM</div>
-            </div>
-            <div class="alarm-container">
-              <h3>SET ALARM</h3>
-              <div class="alarm-inputs">
-                <input type="time" id="alarm-time">
-                <select id="alarm-sound">
-                  <option value="beep">Classic Beep</option>
-                  <option value="cyber">Cyber Ring</option>
-                  <option value="chime">Soft Chime</option>
-                </select>
-                <button id="set-alarm-btn">Set</button>
-              </div>
-              <div id="alarm-status" class="alarm-status">Walang alarm</div>
-              <div class="alarm-actions" id="alarm-actions" style="display: none;">
-                <button id="snooze-btn" class="snooze-btn">SNOOZE (5 mins)</button>
-                <button id="stop-alarm-btn" class="stop-btn">STOP ALARM</button>
-              </div>
-            </div>
-        </div>
-
-        <div class="logo-container">
-            <img src="BREAD/logo.jpg" alt="Robin and Jane Logo" class="bakery-logo">
-        </div>
-
+</style>
+ </head>
+ <body>
+  <div id="nature-background" aria-hidden="true">
+   <div class="nature-sky">
+    <div class="nature-sun"></div>
+    <div class="nature-moon"></div>
+    <div class="nature-cloud c1"></div>
+    <div class="nature-cloud c2"></div>
+    <div class="nature-cloud c3"></div>
+    <div class="nature-stars" id="nature-stars"></div>
+    <div class="nature-rain"></div>
+    <div class="nature-rainbow"></div>
+   </div>
+   <div class="nature-hill back"></div>
+   <div class="nature-hill mid"></div>
+   <div class="nature-river"></div>
+   <div class="nature-ground"></div>
+   <div class="nature-tree t1"></div>
+   <div class="nature-tree t2"></div>
+   <div class="nature-tree t3"></div>
+   <div class="nature-butterfly b1"></div>
+   <div class="nature-butterfly b2"></div>
+   <div class="nature-butterfly b3"></div>
+   <div class="nature-bird r1"></div>
+   <div class="nature-bird r2"></div>
+   <div class="nature-bird r3"></div>
+  </div>
+  <header>
+   <h1 style="color:blue;">ROBIN &amp; JANE BAKERY</h1>
+   <p style="color:rgb(238,166,10);">tinapay, mainit pa sa pagmamahal mo, bili na.</p>
+   <div class="header-top-row">
+    <div class="main-container">
+     <div class="clock-frame">
+      <div class="glass-overlay"></div>
+      <div class="clock">
+       <div class="center-dot"></div>
+       <div class="hand hour" id="hour-hand"></div>
+       <div class="hand minute" id="minute-hand"></div>
+       <div class="hand second" id="second-hand"></div>
+      </div>
+     </div>
+     <div class="digital-container">
+      <div class="date-text" id="date-text"></div>
+      <div class="digital-time" id="digital-time"></div>
+     </div>
+     <div class="alarm-container">
+      <h3>SET ALARM</h3>
+      <div class="alarm-inputs">
+       <input type="time" id="alarm-time"><select id="alarm-sound"><option value="beep">Classic Beep</option><option value="cyber">Cyber Ring</option><option value="chime">Soft Chime</option></select>
+       <button id="set-alarm-btn">Set</button>
+      </div>
+      <div id="alarm-status" class="alarm-status">Walang alarm</div>
+      <div class="alarm-actions" id="alarm-actions" style="display:none;">
+       <button id="snooze-btn" class="snooze-btn">SNOOZE (5 mins)</button>
+       <button id="stop-alarm-btn" class="stop-btn">STOP ALARM</button>
+      </div>
+     </div>
     </div>
-
-</header>
-
-<section class="menu">
-    <h2 style="color: #ec830c;">🍞 Menu ng Tinapay</h2>
-<div class="item">
+    <div class="logo-container">
+     <img src="BREAD/logo.jpg" alt="Robin and Jane Logo" class="bakery-logo">
+    </div>
+   </div>
+  </header>
+  <section class="menu">
+   <h2 style="color:#ec830c;width:100%;text-align:center;">🍞 Menu ng Tinapay</h2>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Pandesal.jpg" alt="Pandesal">
-        <span>Pandesal (10pcs)</span>
+     <img src="BREAD/Pandesal.jpg" alt="Pandesal"><span>Pandesal (10pcs)</span>
     </div>
     <b>₱20.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Spanish_bread.jpg" alt="Spanish bread">
-        <span>Spanish bread</span>
+     <img src="BREAD/Spanish_bread.jpg" alt="Spanish bread"><span>Spanish bread</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Enzymada.jpg" alt="Enzymada">
-        <span>₱5.00</span>
+     <img src="BREAD/Enzymada.jpg" alt="Enzymada"><span>₱5.00</span>
     </div>
     <b>Enzymada</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Pan_de_coco.jpg" alt="Panecoco">
-        <span>₱5.00</span>
+     <img src="BREAD/Pan_de_coco.jpg" alt="Panecoco"><span>₱5.00</span>
     </div>
     <b>Pandecoco</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Pinagong.jpg" alt="Pinagong">
-        <span>Pinagong</span>
+     <img src="BREAD/Pinagong.jpg" alt="Pinagong"><span>Pinagong</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Pineapple_pie.jpg" alt="Pineapple_pie">
-        <span>Pineapple pie</span>
+     <img src="BREAD/Pineapple_pie.jpg" alt="Pineapple pie"><span>Pineapple pie</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Kababayan.jpg" alt="Kababayan">
-        <span>Kababayan</span>
+     <img src="BREAD/Kababayan.jpg" alt="Kababayan"><span>Kababayan</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Putok_tigas.jpg" alt="Putok_tigas">
-        <span>Putok tigas</span>
+     <img src="BREAD/Putok_tigas.jpg" alt="Putok tigas"><span>Putok tigas</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Senador.jpg" alt="Senador">
-        <span>Senador</span>
+     <img src="BREAD/Senador.jpg" alt="Senador"><span>Senador</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Binangkal.jpg" alt="Binangkal">
-        <span>Binangkal</span>
+     <img src="BREAD/Binangkal.jpg" alt="Binangkal"><span>Binangkal</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Brownies.jpg" alt="Brownies">
-        <span>Brownies</span>
+     <img src="BREAD/Brownies.jpg" alt="Brownies"><span>Brownies</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Crinkles.jpg" alt="Crinkles">
-        <span>Crinkles</span>
+     <img src="BREAD/Crinkles.jpg" alt="Crinkles"><span>Crinkles</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Custard_cake.jpg" alt="Custard_cake">
-        <span>Custard cake</span>
+     <img src="BREAD/Custard_cake.jpg" alt="Custard cake"><span>Custard cake</span>
     </div>
     <b>₱20.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Egg_pie.jpg" alt="Egg_pie">
-        <span>Egg pie</span>
+     <img src="BREAD/Egg_pie.jpg" alt="Egg pie"><span>Egg pie</span>
     </div>
     <b>₱25.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Hopia.jpg" alt="Hopia">
-        <span>Hopia</span>
+     <img src="BREAD/Hopia.jpg" alt="Hopia"><span>Hopia</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Hopia_ube.jpg" alt="Hopia_ube">
-        <span>Hopia ube</span>
+     <img src="BREAD/Hopia_ube.jpg" alt="Hopia ube"><span>Hopia ube</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Lahar.jpg" alt="Lahar">
-        <span>Lahar</span>
+     <img src="BREAD/Lahar.jpg" alt="Lahar"><span>Lahar</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Monay_putok.jpg" alt="Monay_putok">
-        <span>Monay putok</span>
+     <img src="BREAD/Monay_putok.jpg" alt="Monay putok"><span>Monay putok</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Pianono_roll_choco_ordinary.jpg" alt="Pianono_roll_choco_ordinary">
-        <span>Pianono roll choco ordinary</span>
+     <img src="BREAD/Pianono_roll_choco_ordinary.jpg" alt="Pianono roll choco ordinary"><span>Pianono roll choco ordinary</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Pianono_roll_choco_special.jpg" alt="Pianono_roll_choco_special">
-        <span>Pianono roll choco special</span>
+     <img src="BREAD/Pianono_roll_choco_special.jpg" alt="Pianono roll choco special"><span>Pianono roll choco special</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Pianono_roll_ube_ordinary.jpg" alt="Pianono_roll_ube_ordinary">
-        <span>Pianono roll ube ordinary</span>
+     <img src="BREAD/Pianono_roll_ube_ordinary.jpg" alt="Pianono roll ube ordinary"><span>Pianono roll ube ordinary</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Pianono_roll_ube_special.jpg" alt="Pianono_roll_ube_special">
-        <span>Pianono roll ube special</span>
+     <img src="BREAD/Pianono_roll_ube_special.jpg" alt="Pianono roll ube special"><span>Pianono roll ube special</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Pianono_roll_white_ordinary.jpg" alt="Pianono_roll_white_ordinary">
-        <span>Pianono roll white ordinary</span>
+     <img src="BREAD/Pianono_roll_white_ordinary.jpg" alt="Pianono roll white ordinary"><span>Pianono roll white ordinary</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Pianono_roll_white_special.jpg" alt="Pianono_roll_white_special">
-        <span>Pianono roll white special</span>
+     <img src="BREAD/Pianono_roll_white_special.jpg" alt="Pianono roll white special"><span>Pianono roll white special</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Slice_hopia.jpg" alt="Slice_hopia">
-        <span>Slice hopia</span>
+     <img src="BREAD/Slice_hopia.jpg" alt="Slice hopia"><span>Slice hopia</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Spotnik.jpg" alt="Spotnik">
-        <span>Spotnik</span>
+     <img src="BREAD/Spotnik.jpg" alt="Spotnik"><span>Spotnik</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Torta.jpg" alt="Torta">
-        <span>Torta</span>
+     <img src="BREAD/Torta.jpg" alt="Torta"><span>Torta</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Ube_bar.jpg" alt="Ube_bar">
-        <span>Ube bar</span>
+     <img src="BREAD/Ube_bar.jpg" alt="Ube bar"><span>Ube bar</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Ube_crumbs.jpg" alt="Ube crumbs">
-        <span>Ube crumbs</span>
+     <img src="BREAD/Ube_crumbs.jpg" alt="Ube crumbs"><span>Ube crumbs</span>
     </div>
     <b>₱5.00</b>
-</div>
-<div class="item">
+   </div>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/Yema_cake.jpg" alt="Yema cake">
-        <span>Yema cake</span>
+     <img src="BREAD/Yema_cake.jpg" alt="Yema cake"><span>Yema cake</span>
     </div>
     <b>₱20.00</b>
-</div>
-</section>
-<section class="location">
-    <h2>📍 Lokasyon ng Tindahan</h2>
-    <p>Barangay Salakan, sitio gaboc, Guinayangan Quezon, 4319</p>
-    <div class="map-container">
-        <iframe 
-            src="https://www.google.com/maps/embed?pb=!4v1786430753824!6m8!1m7!1sHs-HlsinD8qVGwIc-X7RJg!2m2!1d13.92366049625637!2d122.4293217580774!3f211.36734449517883!4f-7.350087186866105!5f0.7820865974627469"
-            width="100%" 
-            height="450"
-            style="border:0;"
-            allowfullscreen
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-    </div>
-    <p style="color: rgb(172, 7, 248);"><em>Ang makikitang larawan ay lumang kuha, hindi ito ang kasalukuyang larawan</em></p>
-<div class="item">
+   </div>
+  </section>
+  <section class="location">
+   <h2>📍 Lokasyon ng Tindahan</h2>
+   <p>Barangay Salakan, sitio gaboc, Guinayangan Quezon, 4319</p>
+   <div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!4v1786430753824!6m8!1m7!1sHs-HlsinD8qVGwIc-X7RJg!2m2!1d13.92366049625637!2d122.4293217580774!3f211.36734449517883!4f-7.350087186866105!5f0.7820865974627469" width="100%" height="450" style="border:0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+   </div>
+   <p style="color:rgb(172,7,248)"><em>Ang makikitang larawan ay lumang kuha, hindi ito ang kasalukuyang larawan</em></p>
+   <div class="item">
     <div class="item-details">
-        <img src="BREAD/logo.jpg" alt="my bakery">
-        <span>my bakery</span>
+     <img src="BREAD/logo.jpg" alt="my bakery"><span>my bakery</span>
     </div>
-</div>
-
-    <address>
-        <p><a style="color: blue;"href="https://maps.app.goo.gl/b2WiU34EGLyS8opN7" target="_blank">👉 Buksan ang buong mapa sa Google Maps</a></p>
-    </address>
-
-    <h2>📞 Kontakin Kami</h2>
-    <p style="color: rgb(231, 150, 27);">Para sa mga bibili dito lang kami sa SITIO GABOC, BARANGAY SALAKAN!</p>
-    <ul>
-        <li><b>Facebook Messenger:</b> <a href="https://m.me/facebook.maryjane.deluna">Maryjane De Luna Judit</a></li>
-        <li><b>Email:</b> <a href="mailto:lovejudit30@gmail.com">lovejudit30@gmail.com</a></li>
-    </ul>
-<p> 😘<a href="https://espedidorobin372-cmyk.github.io/TIMPLA-NG-TINAPAY/timpla_tinapay2.html">CLICK HERE🥰</a> </p>
-<h2 class="greeting">💖💖THANK YOU!'💖💖</h2>
-</section>
-
-<script>
-    const clockFace = document.querySelector('.clock');
-let alarmTime = null;
-let alarmInterval = null;
-let audioCtx = null;
-
-for (let i = 1; i <= 60; i++) {
-  const tick = document.createElement('div');
-  tick.className = 'tick';
-  
-  if (i % 5 === 0) {
-    tick.classList.add('hour-tick');
-    const number = document.createElement('div');
-    number.className = 'number';
-    const angle = i * 6;
-    number.style.transform = `rotate(${angle}deg)`;
-    number.innerHTML = `<span style="display:inline-block; transform:rotate(-${angle}deg)">${i / 5}</span>`;
-    clockFace.appendChild(number);
-  }
-  
-  tick.style.transform = `rotate(${i * 6}deg)`;
-  clockFace.appendChild(tick);
+   </div>
+   <address>
+    <p><a style="color:blue" href="https://maps.app.goo.gl/b2WiU34EGLyS8opN7" target="_blank">👉 Buksan ang buong mapa sa Google Maps</a></p>
+   </address>
+   <h2>📞 Kontakin Kami</h2>
+   <p style="color:rgb(231,150,27)">Para sa mga bibili dito lang kami sa SITIO GABOC, BARANGAY SALAKAN!</p>
+   <ul>
+    <li><b>Facebook Messenger:</b> <a href="https://m.me/facebook.maryjane.deluna">Maryjane De Luna Judit</a></li>
+    <li><b>Email:</b> <a href="mailto:lovejudit30@gmail.com">lovejudit30@gmail.com</a></li>
+   </ul>
+   <p>😘<a href="https://espedidorobin372-cmyk.github.io/TIMPLA-NG-TINAPAY/timpla_tinapay2.html">CLICK HERE🥰</a></p>
+   <h2 class="greeting">💖💖THANK YOU!'💖💖</h2>
+  </section>
+  <script>
+/* ===== NATURE ===== */
+const bg=document.getElementById('nature-background');
+const stars=document.getElementById('nature-stars');
+for(let i=0;i<90;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.top=Math.random()*72+'%';s.style.animationDelay=Math.random()*2+'s';stars.appendChild(s)}
+function updateNature(){
+ const now=new Date(),h=now.getHours(),m=now.getMinutes(),sec=now.getSeconds();
+ const night=h<6||h>=18,dawn=h>=5&&h<8,dusk=h>=17&&h<20;
+ if(night){
+  bg.style.background='linear-gradient(to bottom,#08142b 0%,#17365a 55%,#183c2a 100%)';
+  document.querySelector('.nature-sun').style.opacity=0;document.querySelector('.nature-moon').style.opacity=1;stars.style.opacity=1;
+ }else{
+  bg.style.background=dawn?'linear-gradient(to bottom,#f6a36b 0%,#ffd79b 45%,#a8d9e8 100%)':dusk?'linear-gradient(to bottom,#e86b55 0%,#f3a15f 42%,#7c9ec4 100%)':'linear-gradient(to bottom,#73c9ff 0%,#c9f1ff 58%,#bfe8a1 100%)';
+  document.querySelector('.nature-sun').style.opacity=.95;document.querySelector('.nature-moon').style.opacity=0;stars.style.opacity=0;
+ }
+ const rain=document.querySelector('.nature-rain'),rainbow=document.querySelector('.nature-rainbow');
+ const raining=(m%17===0&&sec<20);
+ rain.style.opacity=raining?.55:0;
+ rainbow.style.opacity=(m%17===1&&sec<30)?.7:0;
 }
+setInterval(updateNature,1000);updateNature();
+for(let i=0;i<85;i++){const g=document.createElement('div');g.className='nature-grass';g.style.left=Math.random()*100+'%';g.style.height=12+Math.random()*25+'px';g.style.animationDelay=-Math.random()*2+'s';g.style.opacity=.35+Math.random()*.55;bg.appendChild(g)}
 
-function playSound(type) {
-  if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  }
-  
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-  if (type === 'beep') {
-    osc.type = 'sine';
-    osc.frequency.value = 880;
-    gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.4);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.4);
-  } else if (type === 'cyber') {
-    osc.type = 'sawtooth';
-    osc.frequency.setValueAtTime(1200, audioCtx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.3);
-    gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.3);
-  } else if (type === 'chime') {
-    osc.type = 'triangle';
-    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 1.2);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 1.2);
-  }
+/* ===== CLOCK + ALARM ===== */
+const clockFace=document.querySelector('.clock');let alarmTime=null,alarmInterval=null,audioCtx=null;
+for(let i=1;i<=60;i++){
+ const tick=document.createElement('div');tick.className='tick';
+ if(i%5===0){tick.classList.add('hour-tick');const n=document.createElement('div');n.className='number';const a=i*6;n.style.transform=`rotate(${a}deg)`;n.innerHTML=`<span style="display:inline-block;transform:rotate(-${a}deg)">${i/5}</span>`;clockFace.appendChild(n)}
+ tick.style.transform=`rotate(${i*6}deg)`;clockFace.appendChild(tick)
 }
-
-function triggerAlarm() {
-  const selectedSound = document.getElementById('alarm-sound').value;
-  document.getElementById('alarm-actions').style.display = 'flex';
-  document.getElementById('alarm-status').textContent = '🔔 GISING NA!';
-  document.getElementById('alarm-status').style.color = '#ff0055';
-  if (!alarmInterval) {
-    playSound(selectedSound);
-    alarmInterval = setInterval(() => playSound(selectedSound), 800);
-  }
+function playSound(type){
+ if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+ const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();osc.connect(gain);gain.connect(audioCtx.destination);
+ gain.gain.setValueAtTime(.12,audioCtx.currentTime);
+ if(type==='beep'){osc.type='sine';osc.frequency.value=880;gain.gain.exponentialRampToValueAtTime(.00001,audioCtx.currentTime+.4);osc.start();osc.stop(audioCtx.currentTime+.4)}
+ else if(type==='cyber'){osc.type='sawtooth';osc.frequency.setValueAtTime(1200,audioCtx.currentTime);osc.frequency.exponentialRampToValueAtTime(400,audioCtx.currentTime+.3);gain.gain.exponentialRampToValueAtTime(.00001,audioCtx.currentTime+.3);osc.start();osc.stop(audioCtx.currentTime+.3)}
+ else{osc.type='triangle';osc.frequency.setValueAtTime(523.25,audioCtx.currentTime);gain.gain.exponentialRampToValueAtTime(.00001,audioCtx.currentTime+1.2);osc.start();osc.stop(audioCtx.currentTime+1.2)}
 }
-
-function stopAlarmSound() {
-  clearInterval(alarmInterval);
-  alarmInterval = null;
+function triggerAlarm(){const s=document.getElementById('alarm-sound').value;document.getElementById('alarm-actions').style.display='flex';document.getElementById('alarm-status').textContent='🔔 GISING NA!';document.getElementById('alarm-status').style.color='#ff0055';if(!alarmInterval){playSound(s);alarmInterval=setInterval(()=>playSound(s),800)}}
+function stopAlarmSound(){clearInterval(alarmInterval);alarmInterval=null}
+function updateClock(){
+ const now=new Date(),sec=now.getSeconds(),min=now.getMinutes(),hr=now.getHours();
+ document.getElementById('second-hand').style.transform=`rotate(${sec/60*360}deg)`;
+ document.getElementById('minute-hand').style.transform=`rotate(${(min+sec/60)/60*360}deg)`;
+ document.getElementById('hour-hand').style.transform=`rotate(${((hr%12)+min/60)/12*360}deg)`;
+ document.getElementById('date-text').textContent=now.toLocaleDateString('tl-PH',{weekday:'long',year:'numeric',month:'short',day:'numeric'});
+ document.getElementById('digital-time').textContent=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});
+ const cur=`${String(hr).padStart(2,'0')}:${String(min).padStart(2,'0')}`;if(alarmTime&&cur===alarmTime&&sec===0)triggerAlarm()
 }
-
-function updateClock() {
-  const now = new Date();
-  
-  const seconds = now.getSeconds();
-  const minutes = now.getMinutes();
-  const hours = now.getHours();
-  
-  const secondDeg = (seconds / 60) * 360;
-  const minuteDeg = ((minutes + seconds / 60) / 60) * 360;
-  const hourDeg = ((hours % 12 + minutes / 60) / 12) * 360;
-  
-  document.getElementById('second-hand').style.transform = `rotate(${secondDeg}deg)`;
-  document.getElementById('minute-hand').style.transform = `rotate(${minuteDeg}deg)`;
-  document.getElementById('hour-hand').style.transform = `rotate(${hourDeg}deg)`;
-  
-  const optionsDate = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
-  document.getElementById('date-text').textContent = now.toLocaleDateString('tl-PH', optionsDate);
-  
-  const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-  document.getElementById('digital-time').textContent = now.toLocaleTimeString('en-US', optionsTime);
-  
-  const currentTimeFormatted = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
-  if (alarmTime && currentTimeFormatted === alarmTime && seconds === 0) {
-    triggerAlarm();
-  }
-}
-
-document.getElementById('set-alarm-btn').addEventListener('click', () => {
-  const timeInput = document.getElementById('alarm-time').value;
-  if (timeInput) {
-    alarmTime = timeInput;
-    document.getElementById('alarm-status').textContent = `Alarm naka-set sa: ${alarmTime}`;
-    document.getElementById('alarm-status').style.color = '#00f7ff';
-  }
-});
-
-document.getElementById('snooze-btn').addEventListener('click', () => {
-  stopAlarmSound();
-  const now = new Date();
-  now.setMinutes(now.getMinutes() + 5);
-  
-  const snoozeHours = String(now.getHours()).padStart(2, '0');
-  const snoozeMins = String(now.getMinutes()).padStart(2, '0');
-  
-  alarmTime = `${snoozeHours}:${snoozeMins}`;
-  
-  document.getElementById('alarm-actions').style.display = 'none';
-  document.getElementById('alarm-status').textContent = `Snoozed! Tutunog ulit sa: ${alarmTime}`;
-  document.getElementById('alarm-status').style.color = '#ffaa00';
-});
-
-document.getElementById('stop-alarm-btn').addEventListener('click', () => {
-  stopAlarmSound();
-  alarmTime = null;
-  document.getElementById('alarm-actions').style.display = 'none';
-  document.getElementById('alarm-status').textContent = 'Napatay na ang alarm.';
-  document.getElementById('alarm-status').style.color = '#8892b0';
-});
-
-setInterval(updateClock, 1000);
-updateClock();
+document.getElementById('set-alarm-btn').addEventListener('click',()=>{const t=document.getElementById('alarm-time').value;if(t){alarmTime=t;document.getElementById('alarm-status').textContent=`Alarm naka-set sa: ${t}`;document.getElementById('alarm-status').style.color='#00f7ff'}});
+document.getElementById('snooze-btn').addEventListener('click',()=>{stopAlarmSound();const n=new Date();n.setMinutes(n.getMinutes()+5);alarmTime=`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;document.getElementById('alarm-actions').style.display='none';document.getElementById('alarm-status').textContent=`Snoozed! Tutunog ulit sa: ${alarmTime}`;document.getElementById('alarm-status').style.color='#ffaa00'});
+document.getElementById('stop-alarm-btn').addEventListener('click',()=>{stopAlarmSound();alarmTime=null;document.getElementById('alarm-actions').style.display='none';document.getElementById('alarm-status').textContent='Napatay na ang alarm.';document.getElementById('alarm-status').style.color='#8892b0'});
+setInterval(updateClock,1000);updateClock();
 </script>
-<!-- <h2 class="greeting">💖💖THANK YOU!'💖💖</h2> -->
-</body>
+ </body>
 </html>
