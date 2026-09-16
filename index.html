@@ -3,35 +3,37 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ROBIN &amp; JANE BAKERY</title>
+  <title>ROBIN & JANE BAKERY</title>
   <link rel="icon" href="bakery_icons.ico" type="image/x-icon">
   <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
 html,body{min-height:100%}
 body{margin:0;background:transparent!important;position:relative}
 
-/* ===== FIXED LIVING NATURE BACKGROUND ===== */
 #nature-background{
  position:fixed;inset:0;width:100vw;height:100vh;z-index:0;overflow:hidden;
  pointer-events:none;
  background:linear-gradient(to bottom,#73c9ff 0%,#c9f1ff 58%,#bfe8a1 100%);
- transition:background 2s ease;
+ transition:background 3s ease, filter 3s ease;
 }
 .nature-sky{position:absolute;inset:0;overflow:hidden}
 .nature-sun{
- position:absolute;width:110px;height:110px;border-radius:50%;right:10%;top:10%;
+ position:absolute;width:110px;height:110px;border-radius:50%;
  background:radial-gradient(circle,#fffbd0 0%,#ffe27a 48%,rgba(255,210,70,.15) 70%,transparent 72%);
- opacity:.95;transition:opacity 2s
+ opacity:.95;transition:all 3s ease;
+ transform-origin:center center;
 }
 .nature-moon{
- position:absolute;width:82px;height:82px;border-radius:50%;right:12%;top:12%;opacity:0;
+ position:absolute;width:82px;height:82px;border-radius:50%;opacity:0;
  background:radial-gradient(circle at 35% 30%,#fff 0%,#e9eef5 55%,#bfc7d1 100%);
- box-shadow:0 0 30px rgba(255,255,255,.55);transition:opacity 2s
+ box-shadow:0 0 30px rgba(255,255,255,.55);transition:all 3s ease;
+ transform-origin:center center;
 }
 .nature-cloud{
  position:absolute;width:190px;height:52px;border-radius:60px;background:rgba(255,255,255,.78);
  filter:blur(.8px);box-shadow:0 8px 25px rgba(255,255,255,.22);
- animation:natureCloud 55s linear infinite
+ animation:natureCloud 55s linear infinite;
+ transition:opacity 2s ease, transform 2s ease;
 }
 .nature-cloud:before,.nature-cloud:after{content:"";position:absolute;border-radius:50%;background:inherit}
 .nature-cloud:before{width:82px;height:82px;left:30px;bottom:10px}
@@ -40,7 +42,6 @@ body{margin:0;background:transparent!important;position:relative}
 .nature-cloud.c2{top:29%;left:-300px;transform:scale(.72);animation-duration:72s;animation-delay:-28s}
 .nature-cloud.c3{top:9%;left:-400px;transform:scale(.55);animation-duration:88s;animation-delay:-50s;opacity:.55}
 @keyframes natureCloud{from{margin-left:0}to{margin-left:calc(100vw + 700px)}}
-
 .nature-hill{position:absolute;left:-10%;width:120%;border-radius:50% 50% 0 0}
 .nature-hill.back{bottom:25%;height:28%;background:linear-gradient(#76b889,#4d9164);opacity:.72}
 .nature-hill.mid{bottom:12%;height:28%;background:linear-gradient(#4f9a60,#2f7548)}
@@ -56,23 +57,30 @@ body{margin:0;background:transparent!important;position:relative}
  animation:riverFlow 2.5s linear infinite
 }
 @keyframes riverFlow{to{transform:translateY(45px)}}
-
 .nature-tree{
  position:absolute;bottom:18%;width:22px;height:125px;background:#4b2d1c;border-radius:10px;
- transform-origin:bottom center;animation:treeWind 2.8s ease-in-out infinite alternate
+ transform-origin:bottom center;animation:treeWind 2.8s ease-in-out infinite alternate;
+ transition:filter 2s ease;
 }
 .nature-tree:before,.nature-tree:after{content:"";position:absolute;border-radius:50%;background:#2d7d45}
 .nature-tree:before{width:95px;height:95px;left:-38px;top:-55px;box-shadow:35px 20px 0 #3c914d,-20px 24px 0 #347e43}
 .nature-tree:after{width:70px;height:70px;left:-20px;top:-88px;background:#4aa35a}
-.nature-tree.t1{left:8%}.nature-tree.t2{left:80%;transform:scale(.8)}.nature-tree.t3{left:24%;bottom:21%;transform:scale(.62)}
-@keyframes treeWind{to{transform:rotate(2deg) scale(1.02)}}
 
+.tree-shadow{
+ position:absolute;bottom:18%;width:120px;height:20px;
+ background:rgba(0,0,0,.15);border-radius:50%;
+ transform-origin:left bottom;transition:all 3s ease;
+ pointer-events:none;
+}
+.nature-tree.t1{left:8%}.tree-shadow.s1{left:8%;transform:rotate(0deg) scaleX(1);}
+.nature-tree.t2{left:80%;transform:scale(.8)}.tree-shadow.s2{left:80%;transform:rotate(0deg) scaleX(1);}
+.nature-tree.t3{left:24%;bottom:21%;transform:scale(.62)}.tree-shadow.s3{left:24%;bottom:21%;transform:rotate(0deg) scaleX(1);}
+@keyframes treeWind{to{transform:rotate(2deg) scale(1.02)}}
 .nature-grass{
  position:absolute;bottom:17%;width:3px;height:25px;background:#295f31;transform-origin:bottom;
  animation:grassWind 1.5s ease-in-out infinite alternate
 }
 @keyframes grassWind{to{transform:rotate(8deg)}}
-
 .nature-butterfly{
  position:absolute;width:28px;height:22px;animation:butterflyFly 20s ease-in-out infinite;
  filter:drop-shadow(0 3px 3px rgba(0,0,0,.2))
@@ -94,7 +102,6 @@ body{margin:0;background:transparent!important;position:relative}
 .nature-butterfly.b1{left:-4%;top:58%}
 .nature-butterfly.b2{left:-8%;top:38%;animation-duration:25s;animation-delay:-8s;transform:scale(.8)}
 .nature-butterfly.b3{left:-10%;top:67%;animation-duration:29s;animation-delay:-17s;transform:scale(.65)}
-
 .nature-bird{position:absolute;width:34px;height:18px;animation:birdFly 20s linear infinite}
 .nature-bird:before,.nature-bird:after{
  content:"";position:absolute;width:18px;height:7px;border-top:3px solid #29343b;border-radius:50%;
@@ -109,8 +116,7 @@ body{margin:0;background:transparent!important;position:relative}
 .nature-bird.r1{top:22%;left:-5%;animation-duration:25s}
 .nature-bird.r2{top:31%;left:-15%;animation-duration:31s;animation-delay:-10s;transform:scale(.8)}
 .nature-bird.r3{top:16%;left:-20%;animation-duration:38s;animation-delay:-20s;transform:scale(.65)}
-
-.nature-stars{position:absolute;inset:0;opacity:0;transition:opacity 2s}
+.nature-stars{position:absolute;inset:0;opacity:0;transition:opacity 2s ease}
 .nature-stars i{
  position:absolute;width:3px;height:3px;border-radius:50%;background:white;
  box-shadow:0 0 8px white;animation:twinkle 2s ease-in-out infinite alternate
@@ -119,22 +125,24 @@ body{margin:0;background:transparent!important;position:relative}
 .nature-rain{
  position:absolute;inset:0;opacity:0;
  background:repeating-linear-gradient(105deg,transparent 0 15px,rgba(210,240,255,.55) 16px 18px,transparent 19px 34px);
- animation:rainFall .45s linear infinite;transition:opacity .5s
+ animation:rainFall .45s linear infinite;transition:opacity .5s ease;pointer-events:none;
 }
 @keyframes rainFall{to{background-position:0 45px}}
 .nature-rainbow{
  position:absolute;width:65vw;height:28vw;left:17%;bottom:13%;border-radius:50%;
- border:9px solid rgba(255,0,0,.22);border-bottom-color:transparent;opacity:0;filter:blur(2px)
+ border:9px solid rgba(255,0,0,.22);border-bottom-color:transparent;opacity:0;filter:blur(2px);transition:opacity 2s ease;
 }
 .nature-rainbow:after{
  content:"";position:absolute;inset:8px;border-radius:50%;border:8px solid rgba(255,180,0,.20);
  border-bottom-color:transparent;box-shadow:0 0 0 8px rgba(0,210,100,.16),0 0 0 16px rgba(0,120,255,.15),0 0 0 24px rgba(160,50,255,.13)
 }
 
-/* Keep bakery website above nature */
-body>header,body>section{position:relative;z-index:1}
+.night-overlay{
+ position:absolute;inset:0;background:rgba(10,20,50,0);transition:background 3s ease;pointer-events:none;z-index:2;
+}
 
-/* ===== BAKERY STYLES ===== */
+body>header,body>section{position:relative;z-index:5}
+
 header{text-align:center;padding:20px 10px}
 .header-top-row{display:flex;justify-content:space-between;align-items:center;width:100%;margin-top:20px;flex-wrap:wrap}
 .main-container{display:flex;flex-direction:column;align-items:center;gap:8px}
@@ -158,7 +166,6 @@ header{text-align:center;padding:20px 10px}
 .location .item{margin:20px auto}
 .location iframe{display:block}
 .greeting{margin:30px 0 60px}
-
 .clock-frame{width:320px;height:320px;background:radial-gradient(circle at center,#bfbfbf 0%,#737373 60%,#404040 100%);border:10px solid #555;border-radius:50%;padding:10px;position:relative;display:flex;justify-content:center;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.8),0 0 10px rgba(0,247,255,.3)}
 .glass-overlay{position:absolute;inset:0;border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.02) 50%,rgba(255,255,255,.1));z-index:8;pointer-events:none}
 .clock{width:290px;height:290px;background:url('clock-background.jpeg') center/cover no-repeat;border-radius:50%;position:relative;border:2px solid #00f7ff;box-shadow:inset 0 0 20px rgba(0,0,0,.8);overflow:hidden}
@@ -181,33 +188,80 @@ button{background:#00f7ff;color:#080810;border:none;padding:6px 12px;font-weight
 button:hover{background:#66faff;box-shadow:0 0 10px #00f7ff}
 .alarm-status{font-size:.85rem;color:#8892b0}.alarm-actions{display:flex;gap:10px;width:100%}
 .snooze-btn{background:#ffaa00;color:#080810;flex:1;padding:8px}.stop-btn{background:#ff0055;color:#fff;flex:1;padding:8px}
-
+.weather-status{
+ position:absolute;top:15px;right:15px;background:rgba(0,0,0,.5);color:#fff;padding:10px 15px;
+ border-radius:10px;font-size:.9rem;z-index:10;backdrop-filter:blur(4px);
+}
 @media(max-width:800px){
  .header-top-row{justify-content:center;gap:25px}
  .bakery-logo{width:260px;height:260px}
  .clock-frame{transform:scale(.85);margin:-20px 0}
  .nature-river{left:38%;width:40%}
+ .weather-status{font-size:.8rem;padding:8px 12px;}
 }
-</style>
+
+.title-container {
+  position: relative;
+  text-align: center;
+  padding: 20px 10px;
+  height: 120px;
+  overflow: hidden;
+}
+
+.text-slide {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transform: translateY(10px); 
+  transition: opacity 1.8s ease, transform 1.8s ease; 
+  pointer-events: none;
+}
+
+.text-slide.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.text-slide h1 {
+  color: #0000ff;
+  font-size: 2.7em;
+  margin: 0 0 8px 0;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.text-slide p {
+  color: #06faee;
+  font-size: 1.1em;
+  margin: 0;
+}
+  </style>
  </head>
  <body>
   <div id="nature-background" aria-hidden="true">
+   <div class="night-overlay" id="night-overlay"></div>
    <div class="nature-sky">
-    <div class="nature-sun"></div>
-    <div class="nature-moon"></div>
-    <div class="nature-cloud c1"></div>
-    <div class="nature-cloud c2"></div>
-    <div class="nature-cloud c3"></div>
+    <div class="nature-sun" id="sun"></div>
+    <div class="nature-moon" id="moon"></div>
+    <div class="nature-cloud c1" id="cloud1"></div>
+    <div class="nature-cloud c2" id="cloud2"></div>
+    <div class="nature-cloud c3" id="cloud3"></div>
     <div class="nature-stars" id="nature-stars"></div>
-    <div class="nature-rain"></div>
-    <div class="nature-rainbow"></div>
+    <div class="nature-rain" id="rain"></div>
+    <div class="nature-rainbow" id="rainbow"></div>
    </div>
    <div class="nature-hill back"></div>
    <div class="nature-hill mid"></div>
    <div class="nature-river"></div>
    <div class="nature-ground"></div>
+   
+   <div class="tree-shadow s1" id="shadow1"></div>
    <div class="nature-tree t1"></div>
+   <div class="tree-shadow s2" id="shadow2"></div>
    <div class="nature-tree t2"></div>
+   <div class="tree-shadow s3" id="shadow3"></div>
    <div class="nature-tree t3"></div>
    <div class="nature-butterfly b1"></div>
    <div class="nature-butterfly b2"></div>
@@ -216,9 +270,29 @@ button:hover{background:#66faff;box-shadow:0 0 10px #00f7ff}
    <div class="nature-bird r2"></div>
    <div class="nature-bird r3"></div>
   </div>
+
+  
+  <div class="weather-status" id="weather-status">
+   🌤️ Naglo-load ang panahon...
+  </div>
+
   <header>
+
+    
+<div class="title-container">
+  <div class="text-slide active" id="text1">
+    <h1>ROBIN & JANE BAKERY</h1>
+    <p>tinapay, mainit pa sa pagmamahal mo, bili na.</p>
+  </div>
+  <div class="text-slide" id="text2">
+    <h1>WELCOME!</h1>
+    <p>Masaya kaming narito kayo — mamili at mag-enjoy</p>
+  </div>
+</div>
+
+<!--
    <h1 style="color:blue;">ROBIN &amp; JANE BAKERY</h1>
-   <p style="color:rgb(238,166,10);">tinapay, mainit pa sa pagmamahal mo, bili na.</p>
+   <p style="color:rgb(238,166,10);">tinapay, mainit pa sa pagmamahal mo, bili na.</p> -->
    <div class="header-top-row">
     <div class="main-container">
      <div class="clock-frame">
@@ -460,58 +534,351 @@ button:hover{background:#66faff;box-shadow:0 0 10px #00f7ff}
    <h2 class="greeting">💖💖THANK YOU!'💖💖</h2>
   </section>
   <script>
-/* ===== NATURE ===== */
-const bg=document.getElementById('nature-background');
-const stars=document.getElementById('nature-stars');
-for(let i=0;i<90;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.top=Math.random()*72+'%';s.style.animationDelay=Math.random()*2+'s';stars.appendChild(s)}
-function updateNature(){
- const now=new Date(),h=now.getHours(),m=now.getMinutes(),sec=now.getSeconds();
- const night=h<6||h>=18,dawn=h>=5&&h<8,dusk=h>=17&&h<20;
- if(night){
-  bg.style.background='linear-gradient(to bottom,#08142b 0%,#17365a 55%,#183c2a 100%)';
-  document.querySelector('.nature-sun').style.opacity=0;document.querySelector('.nature-moon').style.opacity=1;stars.style.opacity=1;
- }else{
-  bg.style.background=dawn?'linear-gradient(to bottom,#f6a36b 0%,#ffd79b 45%,#a8d9e8 100%)':dusk?'linear-gradient(to bottom,#e86b55 0%,#f3a15f 42%,#7c9ec4 100%)':'linear-gradient(to bottom,#73c9ff 0%,#c9f1ff 58%,#bfe8a1 100%)';
-  document.querySelector('.nature-sun').style.opacity=.95;document.querySelector('.nature-moon').style.opacity=0;stars.style.opacity=0;
- }
- const rain=document.querySelector('.nature-rain'),rainbow=document.querySelector('.nature-rainbow');
- const raining=(m%17===0&&sec<20);
- rain.style.opacity=raining?.55:0;
- rainbow.style.opacity=(m%17===1&&sec<30)?.7:0;
-}
-setInterval(updateNature,1000);updateNature();
-for(let i=0;i<85;i++){const g=document.createElement('div');g.className='nature-grass';g.style.left=Math.random()*100+'%';g.style.height=12+Math.random()*25+'px';g.style.animationDelay=-Math.random()*2+'s';g.style.opacity=.35+Math.random()*.55;bg.appendChild(g)}
 
-/* ===== CLOCK + ALARM ===== */
-const clockFace=document.querySelector('.clock');let alarmTime=null,alarmInterval=null,audioCtx=null;
+const LAT = 13.92;   
+const LON = 122.43; 
+
+const bg = document.getElementById('nature-background');
+const sun = document.getElementById('sun');
+const moon = document.getElementById('moon');
+const stars = document.getElementById('nature-stars');
+const nightOverlay = document.getElementById('night-overlay');
+const rain = document.getElementById('rain');
+const rainbow = document.getElementById('rainbow');
+const weatherStatus = document.getElementById('weather-status');
+const clouds = [
+ document.getElementById('cloud1'),
+ document.getElementById('cloud2'),
+ document.getElementById('cloud3')
+];
+const shadows = [
+ document.getElementById('shadow1'),
+ document.getElementById('shadow2'),
+ document.getElementById('shadow3')
+];
+
+
+for(let i=0;i<90;i++){
+ const s=document.createElement('i');
+ s.style.left=Math.random()*100+'%';
+ s.style.top=Math.random()*72+'%';
+ s.style.animationDelay=Math.random()*2+'s';
+ stars.appendChild(s);
+}
+
+
+function getSunPosition(hour, minute, dayOfYear) {
+ 
+ const sunriseHour = 6;
+ const sunsetHour = 18;
+ 
+
+ const totalMinutes = hour * 60 + minute;
+ const sunriseMinutes = sunriseHour * 60;
+ const sunsetMinutes = sunsetHour * 60;
+ 
+ let progress;
+ if (totalMinutes < sunriseMinutes || totalMinutes > sunsetMinutes) {
+ 
+  progress = null;
+ } else {
+  
+  progress = (totalMinutes - sunriseMinutes) / (sunsetMinutes - sunriseMinutes);
+ }
+ 
+ return progress; 
+}
+
+
+function getSkyGradient(h) {
+ if (h >= 5 && h < 7) {
+  
+  return 'linear-gradient(to bottom, #ff7e5f 0%, #feb47b 30%, #ffedbc 60%, #87ceeb 100%)';
+ } else if (h >= 7 && h < 11) {
+   
+  return 'linear-gradient(to bottom, #87ceeb 0%, #b0e0e6 40%, #98fb98 100%)';
+ } else if (h >= 11 && h < 14) {
+  
+  return 'linear-gradient(to bottom, #4facfe 0%, #87ceeb 50%, #bfe8a1 100%)';
+ } else if (h >= 14 && h < 17) {
+  
+  return 'linear-gradient(to bottom, #87ceeb 0%, #ffd89b 70%, #f6a36b 100%)';
+ } else if (h >= 17 && h < 19) {
+ 
+  return 'linear-gradient(to bottom, #e74c3c 0%, #f39c12 30%, #9b59b6 70%, #2c3e50 100%)';
+ } else {
+ 
+  return 'linear-gradient(to bottom, #0c1445 0%, #1a2a6c 50%, #2c3e50 100%)';
+ }
+}
+
+
+function placeSunAndMoon(hour, minute) {
+ const totalMinutes = hour * 60 + minute;
+ const sunrise = 6 * 60; 
+ const sunset = 18 * 60;  
+ 
+ 
+ if (totalMinutes >= sunrise && totalMinutes <= sunset) {
+  const progress = (totalMinutes - sunrise) / (sunset - sunrise);
+  
+ 
+  const xPercent = 10 + progress * 80;
+  
+
+  const yPercent = 60 - Math.sin(progress * Math.PI) * 50;
+  
+  sun.style.left = xPercent + '%';
+  sun.style.top = yPercent + '%';
+  sun.style.opacity = 0.95;
+  
+ 
+  const shadowLength = 5 + Math.abs(progress - 0.5) * 35;
+  const shadowAngle = (progress - 0.5) * -60;
+  
+  shadows.forEach(shadow => {
+   shadow.style.transform = `rotate(${shadowAngle}deg) scaleX(${shadowLength / 10})`;
+   shadow.style.opacity = 0.15 + Math.abs(progress - 0.5) * 0.2;
+  });
+  
+ } else {
+  
+  sun.style.opacity = 0;
+  
+ 
+  let moonProgress;
+  if (totalMinutes < sunrise) {
+   moonProgress = totalMinutes / (24 * 60 - sunset + sunrise);
+  } else {
+   moonProgress = (totalMinutes - sunset) / (24 * 60 - sunset + sunrise);
+  }
+  moonProgress = Math.max(0, Math.min(1, moonProgress));
+  
+  const moonX = 10 + moonProgress * 80;
+  const moonY = 60 - Math.sin(moonProgress * Math.PI) * 40;
+  
+  moon.style.left = moonX + '%';
+  moon.style.top = moonY + '%';
+  moon.style.opacity = 0.9;
+  
+ 
+  shadows.forEach(s => s.style.opacity = 0);
+ }
+ 
+
+ if (totalMinutes < 5 || totalMinutes >= 19) {
+  moon.style.opacity = 0.9;
+  stars.style.opacity = 1;
+  nightOverlay.style.background = 'rgba(10,20,50,0.4)';
+ } else {
+  moon.style.opacity = 0;
+  stars.style.opacity = 0;
+  nightOverlay.style.background = 'rgba(10,20,50,0)';
+ }
+}
+
+
+let weatherData = { raining: false, cloudy: 0, fetched: false };
+
+async function fetchWeather() {
+ try {
+ 
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current_weather=true&timezone=Asia%2FManila`;
+  
+  const res = await fetch(url);
+  const data = await res.json();
+  
+  const code = data.current_weather.weathercode;
+  const temp = data.current_weather.temperature;
+  
+ 
+  const isRaining = code >= 51 && code <= 99;
+  const cloudiness = code <= 0 ? 0 : code <= 3 ? 0.5 : 1;
+  
+  weatherData = { 
+   raining: isRaining, 
+   cloudy: cloudiness,
+   fetched: true,
+   temp: temp,
+   code: code
+  };
+  
+ 
+  let statusText = '';
+  if (isRaining) statusText = '🌧️ Umuulan sa Guinayangan';
+  else if (cloudiness > 0.6) statusText = '☁️ Makulimlim sa Guinayangan';
+  else if (cloudiness > 0.3) statusText = '⛅ Bahagyang maulap';
+  else statusText = '☀️ Maaliwalas ang langit';
+  statusText += ` — ${temp}°C`;
+  
+  weatherStatus.innerHTML = statusText;
+  
+ } catch (err) {
+  console.log('Hindi makakuha ng panahon — gagamit ng oras na lamang');
+  weatherData.fetched = false;
+  weatherStatus.innerHTML = '🕐 Ayon sa oras — walang koneksyon sa panahon';
+ }
+}
+
+
+function updateNature() {
+ const now = new Date();
+ const h = now.getHours();
+ const m = now.getMinutes();
+ const sec = now.getSeconds();
+ 
+
+ bg.style.background = getSkyGradient(h);
+ 
+
+ placeSunAndMoon(h, m);
+ 
+
+ if (weatherData.cloudy > 0.6) {
+  clouds.forEach(c => c.style.opacity = 1);
+  bg.style.filter = 'brightness(0.85)';
+ } else if (weatherData.cloudy > 0.3) {
+  clouds.forEach(c => c.style.opacity = 0.7);
+  bg.style.filter = 'brightness(0.95)';
+ } else {
+  clouds.forEach(c => c.style.opacity = 0.6);
+  bg.style.filter = 'brightness(1)';
+ }
+ 
+
+ const isRainingNow = weatherData.raining;
+ const wasRainingJustBefore = m % 17 === 0 && sec < 20;
+ const showRain = isRainingNow || (!weatherData.fetched && wasRainingJustBefore);
+ 
+ rain.style.opacity = showRain ? 0.6 : 0;
+ 
+
+ if (showRain) {
+  rainbow.style.opacity = 0;
+ } else if (weatherData.fetched && weatherData.cloudy < 0.4) {
+  rainbow.style.opacity = 0.6;
+ } else if (!weatherData.fetched && m % 17 === 1 && sec < 30) {
+  rainbow.style.opacity = 0.7;
+ } else {
+  rainbow.style.opacity = 0;
+ }
+}
+
+
+let alarmTime = null, alarmInterval = null, audioCtx = null;
+
 for(let i=1;i<=60;i++){
- const tick=document.createElement('div');tick.className='tick';
- if(i%5===0){tick.classList.add('hour-tick');const n=document.createElement('div');n.className='number';const a=i*6;n.style.transform=`rotate(${a}deg)`;n.innerHTML=`<span style="display:inline-block;transform:rotate(-${a}deg)">${i/5}</span>`;clockFace.appendChild(n)}
- tick.style.transform=`rotate(${i*6}deg)`;clockFace.appendChild(tick)
+ const tick = document.createElement('div');
+ tick.className = 'tick';
+ if(i%5===0){
+  tick.classList.add('hour-tick');
+  const n = document.createElement('div');
+  n.className = 'number';
+  const a = i*6;
+  n.style.transform = `rotate(${a}deg)`;
+  n.innerHTML = `<span style="display:inline-block;transform:rotate(-${a}deg)">${i/5}</span>`;
+  document.querySelector('.clock').appendChild(n);
+ }
+ tick.style.transform =`rotate(${i*6}deg)`;
+ document.querySelector('.clock').appendChild(tick);
 }
 function playSound(type){
  if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
- const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();osc.connect(gain);gain.connect(audioCtx.destination);
+ const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
+ osc.connect(gain);gain.connect(audioCtx.destination);
  gain.gain.setValueAtTime(.12,audioCtx.currentTime);
- if(type==='beep'){osc.type='sine';osc.frequency.value=880;gain.gain.exponentialRampToValueAtTime(.00001,audioCtx.currentTime+.4);osc.start();osc.stop(audioCtx.currentTime+.4)}
- else if(type==='cyber'){osc.type='sawtooth';osc.frequency.setValueAtTime(1200,audioCtx.currentTime);osc.frequency.exponentialRampToValueAtTime(400,audioCtx.currentTime+.3);gain.gain.exponentialRampToValueAtTime(.00001,audioCtx.currentTime+.3);osc.start();osc.stop(audioCtx.currentTime+.3)}
- else{osc.type='triangle';osc.frequency.setValueAtTime(523.25,audioCtx.currentTime);gain.gain.exponentialRampToValueAtTime(.00001,audioCtx.currentTime+1.2);osc.start();osc.stop(audioCtx.currentTime+1.2)}
+ if(type==='beep'){
+  osc.type='sine';osc.frequency.value=880;
+  gain.gain.exponentialRampToValueAtTime(.00001,audioCtx.currentTime+.4);
+  osc.start();osc.stop(audioCtx.currentTime+.4);
+ } else if(type==='cyber'){
+  osc.type='sawtooth';osc.frequency.setValueAtTime(1200,audioCtx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(400,audioCtx.currentTime+.3);
+  gain.gain.exponentialRampToValueAtTime(.00001,audioCtx.currentTime+.3);
+  osc.start();osc.stop(audioCtx.currentTime+.3);
+ } else {
+  osc.type='triangle';osc.frequency.setValueAtTime(523.25,audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.00001,audioCtx.currentTime+1.2);
+  osc.start();osc.stop(audioCtx.currentTime+1.2);
+ }
 }
-function triggerAlarm(){const s=document.getElementById('alarm-sound').value;document.getElementById('alarm-actions').style.display='flex';document.getElementById('alarm-status').textContent='🔔 GISING NA!';document.getElementById('alarm-status').style.color='#ff0055';if(!alarmInterval){playSound(s);alarmInterval=setInterval(()=>playSound(s),800)}}
-function stopAlarmSound(){clearInterval(alarmInterval);alarmInterval=null}
+function triggerAlarm(){
+ const s=document.getElementById('alarm-sound').value;
+ document.getElementById('alarm-actions').style.display='flex';
+ document.getElementById('alarm-status').textContent='🔔 GISING NA!';
+ document.getElementById('alarm-status').style.color='#ff0055';
+ if(!alarmInterval){
+  playSound(s);
+  alarmInterval=setInterval(()=>playSound(s),800);
+ }
+}
+function stopAlarmSound(){
+ clearInterval(alarmInterval);
+ alarmInterval=null;
+}
 function updateClock(){
  const now=new Date(),sec=now.getSeconds(),min=now.getMinutes(),hr=now.getHours();
  document.getElementById('second-hand').style.transform=`rotate(${sec/60*360}deg)`;
  document.getElementById('minute-hand').style.transform=`rotate(${(min+sec/60)/60*360}deg)`;
  document.getElementById('hour-hand').style.transform=`rotate(${((hr%12)+min/60)/12*360}deg)`;
- document.getElementById('date-text').textContent=now.toLocaleDateString('tl-PH',{weekday:'long',year:'numeric',month:'short',day:'numeric'});
- document.getElementById('digital-time').textContent=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true});
- const cur=`${String(hr).padStart(2,'0')}:${String(min).padStart(2,'0')}`;if(alarmTime&&cur===alarmTime&&sec===0)triggerAlarm()
+ document.getElementById('date-text').textContent=now.toLocaleDateString('tl-PH',{
+  weekday:'long',year:'numeric',month:'short',day:'numeric'
+ });
+ document.getElementById('digital-time').textContent=now.toLocaleTimeString('en-US',{
+  hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true
+ });
+ const cur=`${String(hr).padStart(2,'0')}:${String(min).padStart(2,'0')}`;
+ if(alarmTime&&cur===alarmTime&&sec===0)triggerAlarm();
 }
-document.getElementById('set-alarm-btn').addEventListener('click',()=>{const t=document.getElementById('alarm-time').value;if(t){alarmTime=t;document.getElementById('alarm-status').textContent=`Alarm naka-set sa: ${t}`;document.getElementById('alarm-status').style.color='#00f7ff'}});
-document.getElementById('snooze-btn').addEventListener('click',()=>{stopAlarmSound();const n=new Date();n.setMinutes(n.getMinutes()+5);alarmTime=`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;document.getElementById('alarm-actions').style.display='none';document.getElementById('alarm-status').textContent=`Snoozed! Tutunog ulit sa: ${alarmTime}`;document.getElementById('alarm-status').style.color='#ffaa00'});
-document.getElementById('stop-alarm-btn').addEventListener('click',()=>{stopAlarmSound();alarmTime=null;document.getElementById('alarm-actions').style.display='none';document.getElementById('alarm-status').textContent='Napatay na ang alarm.';document.getElementById('alarm-status').style.color='#8892b0'});
-setInterval(updateClock,1000);updateClock();
+document.getElementById('set-alarm-btn').addEventListener('click',()=>{
+ const t=document.getElementById('alarm-time').value;
+ if(t){
+  alarmTime=t;
+  document.getElementById('alarm-status').textContent=`Alarm naka-set sa: ${t}`;
+  document.getElementById('alarm-status').style.color='#00f7ff';
+ }
+});
+document.getElementById('snooze-btn').addEventListener('click',()=>{
+ stopAlarmSound();
+ const n=new Date();
+ n.setMinutes(n.getMinutes()+5);
+ alarmTime=`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}`;
+ document.getElementById('alarm-actions').style.display='none';
+ document.getElementById('alarm-status').textContent=`Snoozed! Tutunog ulit sa: ${alarmTime}`;
+ document.getElementById('alarm-status').style.color='#ffaa00';
+});
+document.getElementById('stop-alarm-btn').addEventListener('click',()=>{
+ stopAlarmSound();
+ alarmTime=null;
+ document.getElementById('alarm-actions').style.display='none';
+ document.getElementById('alarm-status').textContent='Napatay na ang alarm.';
+ document.getElementById('alarm-status').style.color='#8892b0';
+});
+
+
+fetchWeather();    
+setInterval(fetchWeather, 10 * 60 * 1000); 
+updateNature();        
+setInterval(updateNature, 1000); 
+updateClock();  
+setInterval(updateClock, 1000); 
+
+let currentTextIndex = 1;
+const TEXT_DISPLAY_TIME = 5000; 
+
+function switchText() {
+ 
+  document.getElementById('text' + currentTextIndex).classList.remove('active');
+  
+ 
+  currentTextIndex = currentTextIndex === 1 ? 2 : 1;
+  
+ 
+  document.getElementById('text' + currentTextIndex).classList.add('active');
+}
+
+
+setInterval(switchText, TEXT_DISPLAY_TIME);
 </script>
- </body>
+</body>
 </html>
